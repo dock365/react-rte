@@ -82,6 +82,9 @@ export default class EditorToolbar extends Component {
         case 'LINK_BUTTONS': {
           return this._renderLinkButtons(groupName, toolbarConfig);
         }
+        case 'YOUTUBE_BUTTONS': {
+          return this._renderYoutubeButtons(groupName, toolbarConfig);
+        }
         case 'IMAGE_BUTTON': {
           return this._renderImageButton(groupName, toolbarConfig);
         }
@@ -204,6 +207,38 @@ export default class EditorToolbar extends Component {
           label="Link"
           iconName="link"
           isDisabled={!shouldShowLinkButton}
+          showPopover={this.state.showLinkInput}
+          onTogglePopover={this._toggleShowLinkInput}
+          defaultValue={defaultValue}
+          onSubmit={this._setLink}
+        />
+        <IconButton
+          {...toolbarConfig.extraProps}
+          label="Remove Link"
+          iconName="remove-link"
+          isDisabled={!isCursorOnLink}
+          onClick={this._removeLink}
+          focusOnClick={false}
+        />
+      </ButtonGroup>
+    );
+  }
+
+  _renderYoutubeButtons(name: string, toolbarConfig: ToolbarConfig) {
+    let {editorState} = this.props;
+    let selection = editorState.getSelection();
+    let entity = this._getEntityAtCursor();
+    let hasSelection = !selection.isCollapsed();
+    let isCursorOnLink = (entity != null && entity.type === ENTITY_TYPE.LINK);
+    let shouldShowLinkButton = hasSelection || isCursorOnLink;
+    let defaultValue = (entity && isCursorOnLink) ? entity.getData().url : '';
+
+    return (
+      <ButtonGroup key={name}>
+        <PopoverIconButton
+          label="Youtube Video"
+          iconName="youtube"
+          // isDisabled={!shouldShowLinkButton}
           showPopover={this.state.showLinkInput}
           onTogglePopover={this._toggleShowLinkInput}
           defaultValue={defaultValue}
