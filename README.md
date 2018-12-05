@@ -13,7 +13,7 @@ Try the editor here: [react-rte.org/demo][react-rte-demo]
 
 ## Getting Started
 
-    $ npm install --save react-rte
+    $ npm install --save @dock365/react-rte
 
 `RichTextEditor` is the main editor component. It is comprised of the Draft.js `<Editor>`, some UI components (e.g. toolbar) and some helpful abstractions around getting and setting content with HTML/Markdown.
 
@@ -47,7 +47,7 @@ This example uses newer JavaScript and JSX. For an example in old JavaScript, [s
 
 ```javascript
 import React, {Component, PropTypes} from 'react';
-import RichTextEditor from 'react-rte';
+import RichTextEditor from '@dock365/react-rte';
 
 class MyStatefulEditor extends Component {
   static propTypes = {
@@ -163,7 +163,7 @@ Optimization tip: Try to call `editorValue.toString()` only when you actually ne
 ### Example with ES5 and no JSX
 ```javascript
 var React = require('react');
-var RichTextEditor = require('react-rte');
+var RichTextEditor = require('@dock365/react-rte');
 
 React.createClass({
   propTypes: {
